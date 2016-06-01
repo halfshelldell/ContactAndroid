@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener {
 
-    ArrayAdapter<String> contacts;
+    ArrayAdapter<Contact> contacts;
 
     ListView list;
     EditText text;
@@ -35,13 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list.setOnItemLongClickListener(this);
     }
 
-
     @Override
     public void onClick(View v) {
-        String contact = text.getText().toString();
-        String contact1 = phoneText.getText().toString();
+        String name = text.getText().toString();
+        String phone = phoneText.getText().toString();
+        Contact contact = new Contact(name, phone);
         contacts.add(contact);
-        contacts.add(contact1);
         text.setText("");
         phoneText.setText("");
 
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        String contact = contacts.getItem(position);
+        Contact contact = contacts.getItem(position);
         contacts.remove(contact);
         return true;
     }
